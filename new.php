@@ -4,34 +4,34 @@ include_once("config.php");
 
 $msg = "";
 
-if(isset($_POST['name'])) {	
+if (isset($_POST['name'])) {
   $name = mysqli_real_escape_string($conn, $_POST['name']);
   $age = mysqli_real_escape_string($conn, $_POST['age']);
   $email = mysqli_real_escape_string($conn, $_POST['email']);
-    
+
   // checking empty fields
-  if(empty($name) || empty($age) || empty($email)) {
-        
-    if(empty($name)) {
+  if (empty($name) || empty($age) || empty($email)) {
+
+    if (empty($name)) {
       $msg .= "<p class='alert alert-danger'>Name field is empty.</p>";
     }
-    
-    if(empty($age)) {
+
+    if (empty($age)) {
       $msg .= "<p class='alert alert-danger'>Age field is empty.</p>";
     }
-    
-    if(empty($email)) {
+
+    if (empty($email)) {
       $msg .= "<p class='alert alert-danger'>Email field is empty.</p>";
     }
-    
+
     //link to the previous page
     $msg .= "<p class='alert alert-danger'><a href='javascript:self.history.back();'>Go Back</a></p>";
-  } else { 
+  } else {
     // if all the fields are filled (not empty) 
-      
+
     //insert data to database	
     $result = mysqli_query($conn, "INSERT INTO users(name,age,email) VALUES('$name','$age','$email')");
-    
+
     //display success message
     $msg .= "<p class='alert alert-success'>Data added successfully.</p>";
     $msg .= "<p class='alert alert-success'><a href='index.php'>View Result</a></p>";
@@ -42,22 +42,23 @@ if(isset($_POST['name'])) {
 
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <title>Simple CRUD PHP</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand" href="index.php">CRUD PHP</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCrudPhp">
@@ -76,7 +77,7 @@ if(isset($_POST['name'])) {
   </nav>
 
   <div class="container mt-3">
-  <div class="card">
+    <div class="card">
       <div class="card-header">
         <h5>New</h5>
       </div>
@@ -89,7 +90,7 @@ if(isset($_POST['name'])) {
           </div>
           <div class="mb-3">
             <label for="age">Age</label>
-            <input type="text" class="form-control" name="age" placeholder="Age">
+            <input type="number" class="form-control" name="age" placeholder="Age" required>
           </div>
           <div class="mb-3">
             <label for="email">Email</label>
@@ -99,7 +100,7 @@ if(isset($_POST['name'])) {
         </form>
       </div>
     </div>
-    </div>
+  </div>
 
   </div>
 
@@ -123,7 +124,7 @@ if(isset($_POST['name'])) {
 
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>
