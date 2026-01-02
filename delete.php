@@ -1,12 +1,12 @@
 <?php
-// Include the database connection file
+// Acción Delete: elimina un registro por ID.
 require_once("dbConnection.php");
 
-// Get id parameter value from URL
-$id = $_GET['id'];
+// Tomamos el id desde la URL y lo convertimos a entero.
+$id = (int) $_GET['id'];
 
-// Delete row from the database table
+// Ejecutamos el DELETE en la tabla users.
 $result = mysqli_query($mysqli, "DELETE FROM users WHERE id = $id");
 
-// Redirect to the main display page (index.php in our case)
+// Redirigimos al listado principal.
 header("Location:index.php");
